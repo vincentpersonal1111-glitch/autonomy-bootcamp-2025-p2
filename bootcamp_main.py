@@ -98,7 +98,7 @@ def main() -> int:
         [],
         [heartbeat_queue],
         controller,
-        main_logger
+        main_logger,
     )
     telemetry_worker_properties = worker_manager.WorkerProperties.create(
         WORKER_COUNT,
@@ -107,7 +107,7 @@ def main() -> int:
         [],
         [telemetry_data_queue],
         controller,
-        main_logger
+        main_logger,
     )
     command_worker_properties = worker_manager.WorkerProperties.create(
         WORKER_COUNT,
@@ -116,7 +116,7 @@ def main() -> int:
         [telemetry_data_queue],
         [command_queue],
         controller,
-        main_logger
+        main_logger,
     )
 
     # Heartbeat sender
@@ -155,7 +155,6 @@ def main() -> int:
         if connected == "Disconnected":
             break
         main_logger.info(command_queue.queue.get())
-
 
     main_logger.info("Requested exit")
     controller.request_exit()
