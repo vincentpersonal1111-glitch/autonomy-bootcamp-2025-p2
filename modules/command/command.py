@@ -107,9 +107,9 @@ class Command:  # pylint: disable=too-many-instance-attributes
         else:
             deltax = target.x - data.x
             deltay = target.y - data.y
-            current_yaw = data.yaw*180/math.pi
+            current_yaw = data.yaw * 180 / math.pi
             try:
-                angle = math.atan2(abs(deltay), abs(deltax))*180/math.pi
+                angle = math.atan2(abs(deltay), abs(deltax)) * 180 / math.pi
                 if deltay >= 0:
                     turn_angle = -current_yaw + angle
                     if deltax <= 0:
@@ -128,13 +128,23 @@ class Command:  # pylint: disable=too-many-instance-attributes
                 turn_angle -= 360
             if turn_angle < -180:
                 turn_angle += 360
-            if turn_angle<0:
-                direction=1
+            if turn_angle < 0:
+                direction = 1
             else:
-                direction=-1
+                direction = -1
             if abs(turn_angle) > 5:
                 self.connection.mav.command_long_send(
-                    1, 0, mavutil.mavlink.MAV_CMD_CONDITION_YAW, 0, abs(turn_angle), 5, direction, 1, 0, 0, 0
+                    1,
+                    0,
+                    mavutil.mavlink.MAV_CMD_CONDITION_YAW,
+                    0,
+                    abs(turn_angle),
+                    5,
+                    direction,
+                    1,
+                    0,
+                    0,
+                    0,
                 )
                 queue.queue.put(f"CHANGE YAW: {turn_angle}")
 
