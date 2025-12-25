@@ -57,9 +57,12 @@ def heartbeat_sender_worker(
     # Instantiate class object (heartbeat_sender.HeartbeatSender)
 
     # Main loop: do work.
-    sender = heartbeat_sender.HeartbeatSender.create(
+    success, sender = heartbeat_sender.HeartbeatSender.create(
         connection, mav_type, autopilot, base_mode, custom_mode, system_status
     )
+    if not success:
+        local_logger.error("Couldn't create heartbeat sender object")
+    assert sender is not None
     while not controller.is_exit_requested():
         now = sender.run()
         time.sleep(1)

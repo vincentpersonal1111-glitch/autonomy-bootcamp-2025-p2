@@ -3,6 +3,7 @@ Heartbeat receiving logic.
 """
 
 from pymavlink import mavutil
+from utilities.workers import queue_proxy_wrapper
 from ..common.modules.logger import logger
 
 
@@ -35,21 +36,19 @@ class HeartbeatReceiver:
         """
         Docstring for __init__
 
-        :param self: Description
-        :param key: Description
-        :type key: object
-        :param connection: Description
-        :type connection: mavutil.mavfile
-        :param local_logger: Description
-        :type local_logger: logger.Logger
+        :param self: class object
+        :param key: key from .create method
+        :param connection: mavlink communication object
+        :param local_logger: logger to log data and warnings
         """
         assert key is HeartbeatReceiver.__private_key, "Use create() method"
         self.connection = connection
         self.local_logger = local_logger
+        self.count = 0
 
         # Do any intializiation here
 
-    def run(self, timeout: float) -> object | None:
+    def run(self, timeout: float, queue: queue_proxy_wrapper.QueueProxyWrapper) -> None:
         """
         Attempt to recieve a heartbeat message.
         If disconnected for over a threshold number of periods,
@@ -58,7 +57,14 @@ class HeartbeatReceiver:
         recieved = self.connection.wait_heartbeat(blocking=True, timeout=timeout)
         if recieved is None:
             self.local_logger.warning("Heartbeat not detected")
-        return recieved
+            self.count += 1
+        else:
+            self.count = 0
+            self.local_logger.info("Heartbeat detected")
+        if self.count >= 5:
+            queue.queue.put("Disconnected")
+        else:
+            queue.queue.put("Connected")
 
 
 # =================================================================================================

@@ -25,9 +25,13 @@ def command_worker(
     # Add other necessary worker arguments here
 ) -> None:
     """
-    Worker process.
+    Docstring for command_worker
 
-    args... describe what the arguments are
+    :param connection: mavlink communication object
+    :param target: position object as 3d vector
+    :param queue_input: input queue to recieve data
+    :param queue_output: output queue to send data
+    :param controller: controller object
     """
     # =============================================================================================
     #                          ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
@@ -53,7 +57,8 @@ def command_worker(
     _, command_obj = command.Command.create(connection, local_logger)
     while not controller.is_exit_requested():
         data = queue_input.queue.get()
-        local_logger.info(f"recieved {data}")
+        if data is None:
+            break
         command_obj.run(data, target, queue_output)
 
     # Main loop: do work.

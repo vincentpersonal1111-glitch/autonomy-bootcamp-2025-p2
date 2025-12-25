@@ -22,9 +22,11 @@ def heartbeat_receiver_worker(
     # Add other necessary worker arguments here
 ) -> None:
     """
-    Worker process.
+    Docstring for heartbeat_receiver_worker
 
-    args... describe what the arguments are
+    :param connection: mavlink communication object
+    :param queue: output queue to output connection status
+    :param controller: controller object
     """
     # =============================================================================================
     #                          ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
@@ -47,26 +49,12 @@ def heartbeat_receiver_worker(
     #                          ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
     # =============================================================================================
     timeout = 1
-    count = 0
-    connected = True
     success, recieve = heartbeat_receiver.HeartbeatReceiver.create(connection, local_logger)
     if not success:
         local_logger.error("Couldn't create heartbeat reciever")
         return
     while not controller.is_exit_requested():
-        detected_heartbeat = recieve.run(timeout + 1e-2)
-        if detected_heartbeat is None:
-            count += 1
-        else:
-            count = 0
-            connected = True
-            local_logger.info("Heartbeat detected")
-        if count > 5:
-            connected = False
-        if not connected:
-            queue.queue.put("Disconnected")
-        else:
-            queue.queue.put("Connected")
+        recieve.run(timeout + 1e-2, queue)
 
 
 # =================================================================================================

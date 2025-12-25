@@ -82,7 +82,7 @@ def main() -> int:
     telemetry_data_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manager, QUEUE_MAX_SIZE)
     command_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manager, QUEUE_MAX_SIZE)
     # Create worker properties for each worker type (what inputs it takes, how many workers)
-    heartbeat_sender_properties = worker_manager.WorkerProperties.create(
+    success, heartbeat_sender_properties = worker_manager.WorkerProperties.create(
         WORKER_COUNT,
         heartbeat_sender_worker.heartbeat_sender_worker,
         (mavutil.mavlink.MAV_TYPE_GCS, mavutil.mavlink.MAV_TYPE_INVALID, 0, 0, 0),
@@ -91,7 +91,11 @@ def main() -> int:
         controller,
         main_logger,
     )
-    heartbeat_reciever_properties = worker_manager.WorkerProperties.create(
+    if not success:
+        main_logger.error("Couldn't Create heartbeat sender properties")
+    assert heartbeat_sender_properties is not None
+
+    success, heartbeat_reciever_properties = worker_manager.WorkerProperties.create(
         WORKER_COUNT,
         heartbeat_receiver_worker.heartbeat_receiver_worker,
         (connection,),
@@ -100,7 +104,11 @@ def main() -> int:
         controller,
         main_logger,
     )
-    telemetry_worker_properties = worker_manager.WorkerProperties.create(
+    if not success:
+        main_logger.error("Couldn't Create heartbeat reciever properties")
+    assert heartbeat_reciever_properties is not None
+
+    success, telemetry_worker_properties = worker_manager.WorkerProperties.create(
         WORKER_COUNT,
         telemetry_worker.telemetry_worker,
         (connection,),
@@ -109,7 +117,10 @@ def main() -> int:
         controller,
         main_logger,
     )
-    command_worker_properties = worker_manager.WorkerProperties.create(
+    if not success:
+        main_logger.error("Couldn't create telemetry worker properties")
+    assert telemetry_worker_properties is not None
+    success, command_worker_properties = worker_manager.WorkerProperties.create(
         WORKER_COUNT,
         command_worker.command_worker,
         (connection, command.Position(10, 20, 30)),
@@ -118,6 +129,9 @@ def main() -> int:
         controller,
         main_logger,
     )
+    if not success:
+        main_logger.error("couldn't create command worker properties")
+    assert command_worker_properties is not None
 
     # Heartbeat sender
 
@@ -128,16 +142,30 @@ def main() -> int:
     # Command
 
     # Create the workers (processes) and obtain their managers
-    _, heartbeat_sender_manager = worker_manager.WorkerManager.create(
+    success, heartbeat_sender_manager = worker_manager.WorkerManager.create(
         heartbeat_sender_properties, main_logger
     )
-    _, heartbeat_receiver_manager = worker_manager.WorkerManager.create(
+    if not success:
+        main_logger.error("could not create heartbeat sender manager")
+    assert heartbeat_sender_manager is not None
+    success, heartbeat_receiver_manager = worker_manager.WorkerManager.create(
         heartbeat_reciever_properties, main_logger
     )
-    _, telemetry_manager = worker_manager.WorkerManager.create(
+    if not success:
+        main_logger.error("could not create heartbeat reciever manager")
+    assert heartbeat_receiver_manager is not None
+    success, telemetry_manager = worker_manager.WorkerManager.create(
         telemetry_worker_properties, main_logger
     )
-    _, command_manager = worker_manager.WorkerManager.create(command_worker_properties, main_logger)
+    if not success:
+        main_logger.error("could not create telemetry manager")
+    assert telemetry_manager is not None
+    success, command_manager = worker_manager.WorkerManager.create(
+        command_worker_properties, main_logger
+    )
+    if not success:
+        main_logger.error("could not create command manager")
+    assert command_manager is not None
     # Start worker processes
     heartbeat_sender_manager.start_workers()
     heartbeat_receiver_manager.start_workers()

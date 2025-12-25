@@ -52,12 +52,7 @@ def stop(
     queue: queue_proxy_wrapper.QueueProxyWrapper, main_logger: logger.Logger
 ) -> None:  # Add any necessary arguments
     """
-    Docstring for stop
-
-    :param queue: Description
-    :type queue: queue_proxy_wrapper.QueueProxyWrapper
-    :param main_logger: Description
-    :type main_logger: logger.Logger
+    Stop the workers.
     """
     controller.request_exit()
     queue.fill_and_drain_queue()

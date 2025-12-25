@@ -54,13 +54,10 @@ class Command:  # pylint: disable=too-many-instance-attributes
         """
         Docstring for __init__
 
-        :param self: Description
-        :param key: Description
-        :type key: object
-        :param connection: Description
-        :type connection: mavutil.mavfile
-        :param local_logger: Description
-        :type local_logger: logger.Logger
+        :param self: class object
+        :param key: key from create method
+        :param connection: mavlink communication object
+        :param local_logger: Logger to log data and warnings
         """
         assert key is Command.__private_key, "Use create() method"
         self.connection = connection
@@ -79,20 +76,17 @@ class Command:  # pylint: disable=too-many-instance-attributes
         Docstring for run
         Make a decision based on received telemetry data.
 
-        :param self: Description
-        :param data: Description
-        :type data: telemetry.TelemetryData
-        :param target: Description
-        :type target: Position
-        :param queue: Description
-        :type queue: queue_proxy_wrapper.QueueProxyWrapper
+        :param self: class object
+        :param data: Telemetry data object
+        :param target: Target position object vector
+        :param queue: output queue to log commands
         """
         turn_angle = 0
         self.velocity_sum[0] += data.x_velocity
         self.velocity_sum[1] += data.y_velocity
         self.velocity_sum[2] += data.z_velocity
         self.local_logger.info(
-            f"Average velocity {[self.velocity_sum[0]/self.i,self.velocity_sum[1]/self.i,self.velocity_sum[2]/self.i]}"
+            f"Recieved {data}, Average velocity {[self.velocity_sum[0]/self.i,self.velocity_sum[1]/self.i,self.velocity_sum[2]/self.i]}"
         )
         self.i += 1
         if abs(target.z - data.z) > 0.5:
@@ -113,9 +107,9 @@ class Command:  # pylint: disable=too-many-instance-attributes
         else:
             deltax = target.x - data.x
             deltay = target.y - data.y
-            current_yaw = (data.yaw * 180) / 3.14159
+            current_yaw = data.yaw*180/math.pi
             try:
-                angle = (math.atan(abs(deltay / deltax))) * 180 / 3.14159
+                angle = math.atan2(abs(deltay), abs(deltax))*180/math.pi
                 if deltay >= 0:
                     turn_angle = -current_yaw + angle
                     if deltax <= 0:
@@ -134,9 +128,13 @@ class Command:  # pylint: disable=too-many-instance-attributes
                 turn_angle -= 360
             if turn_angle < -180:
                 turn_angle += 360
+            if turn_angle<0:
+                direction=1
+            else:
+                direction=-1
             if abs(turn_angle) > 5:
                 self.connection.mav.command_long_send(
-                    1, 0, mavutil.mavlink.MAV_CMD_CONDITION_YAW, 0, turn_angle, 5, 1, 1, 0, 0, 0
+                    1, 0, mavutil.mavlink.MAV_CMD_CONDITION_YAW, 0, abs(turn_angle), 5, direction, 1, 0, 0, 0
                 )
                 queue.queue.put(f"CHANGE YAW: {turn_angle}")
 

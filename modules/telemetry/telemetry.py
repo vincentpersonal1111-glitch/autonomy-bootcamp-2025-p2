@@ -2,6 +2,7 @@
 Telemetry gathering logic.
 """
 
+import time
 from pymavlink import mavutil
 
 from ..common.modules.logger import logger
@@ -89,12 +90,21 @@ class Telemetry:
         connection: mavutil.mavfile,
         local_logger: logger.Logger,
     ) -> None:
+        """
+        Docstring for __init__
+
+        :param self: class object
+        :param key: key from create method
+        :param connection: mavlink communication object
+        :param local_logger: logger to log info and errors
+        """
         assert key is Telemetry.__private_key, "Use create() method"
         self.connection = connection
         self.local_logger = local_logger
         local_logger.info("Initialized")
-        self.time_since_last_message = {"ATTITUDE": 0, "LOCAL_POSITION_NED": 0}
         self.attributes = {
+            "time_last_attitude": 0,
+            "time_last_local_position_ned": 0,
             "x": None,
             "y": None,
             "z": None,
@@ -108,6 +118,7 @@ class Telemetry:
             "pitchspeed": None,
             "yawspeed": None,
         }
+        self.times = {"attitude": 0, "position": 0}
 
     def run(
         self,
@@ -116,23 +127,26 @@ class Telemetry:
         """
         Docstring for run
 
-        :param self: Description
-        :return: Description
-        :rtype: TelemetryData | None
+        :param self: class object
+        :return: Telemetry Data object with telemetry information
         """
         msg = self.connection.recv_match(
-            type=["ATTITUDE", "LOCAL_POSITION_NED"], blocking=True, timeout=1
+            type=["ATTITUDE", "LOCAL_POSITION_NED"], blocking=True, timeout=1 + 10e-2
         )
         telemetry_data = "Not Ready"
         if msg is not None:
-            try:
+            if msg.get_type() == "ATTITUDE":
+                self.times["attitude"] = time.time()
+                self.attributes["time_last_attitude"] = msg.time_boot_ms
                 self.attributes["roll"] = msg.roll
                 self.attributes["yaw"] = msg.yaw
                 self.attributes["pitch"] = msg.pitch
                 self.attributes["yawspeed"] = msg.yawspeed
                 self.attributes["pitchspeed"] = msg.pitchspeed
                 self.attributes["rollspeed"] = msg.rollspeed
-            except AttributeError:
+            else:
+                self.times["position"] = time.time()
+                self.attributes["time_last_local_position_ned"] = msg.time_boot_ms
                 self.attributes["x"] = msg.x
                 self.attributes["y"] = msg.y
                 self.attributes["z"] = msg.z
@@ -140,8 +154,24 @@ class Telemetry:
                 self.attributes["vy"] = msg.vy
                 self.attributes["vz"] = msg.vz
             if self.attributes["x"] is not None and self.attributes["roll"] is not None:
+                if (
+                    abs(
+                        self.attributes["time_last_local_position_ned"]
+                        - self.attributes["time_last_attitude"]
+                    )
+                    >= 1000
+                ):
+                    return None
+                if (
+                    time.time() - self.times["attitude"] > 1
+                    or time.time() - self.times["position"] > 1
+                ):
+                    return None
                 telemetry_data = TelemetryData(
-                    msg.time_boot_ms,
+                    max(
+                        self.attributes["time_last_local_position_ned"],
+                        self.attributes["time_last_attitude"],
+                    ),
                     self.attributes["x"],
                     self.attributes["y"],
                     self.attributes["z"],
@@ -159,6 +189,8 @@ class Telemetry:
                     self.attributes[index] = None
         else:
             telemetry_data = None
+            for index in self.attributes:
+                self.attributes[index] = None
         return telemetry_data
         # Read MAVLink message LOCAL_POSITION_NED (32)
         # Read MAVLink message ATTITUDE (30)

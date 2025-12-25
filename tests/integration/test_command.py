@@ -53,14 +53,17 @@ def start_drone() -> None:
 # =================================================================================================
 #                            ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
-def stop(controller: worker_controller.WorkerController) -> None:
+def stop(
+    controller: worker_controller.WorkerController,
+    input_queue: queue_proxy_wrapper.QueueProxyWrapper,
+    output_queue: queue_proxy_wrapper.QueueProxyWrapper,
+) -> None:
     """
-    Docstring for stop
-
-    :param controller: Description
-    :type controller: worker_controller.WorkerController
+    Stop the workers.
     """
     controller.request_exit()
+    input_queue.fill_and_drain_queue()
+    output_queue.fill_and_drain_queue()
 
 
 def read_queue(
@@ -69,14 +72,7 @@ def read_queue(
     controller: worker_controller.WorkerController,
 ) -> None:
     """
-    Docstring for read_queue
-
-    :param main_logger: Description
-    :type main_logger: logger.Logger
-    :param output_queue: Description
-    :type output_queue: queue_proxy_wrapper.QueueProxyWrapper
-    :param controller: Description
-    :type controller: worker_controller.WorkerController
+    Read and print the queue.
     """
     while not controller.is_exit_requested():
         data = output_queue.queue.get()
@@ -232,7 +228,9 @@ def main() -> int:
     ]
 
     # Just set a timer to stop the worker after a while, since the worker infinite loops
-    threading.Timer(TELEMETRY_PERIOD * len(path), stop, (controller,)).start()
+    threading.Timer(
+        TELEMETRY_PERIOD * len(path), stop, (controller, input_queue, output_queue)
+    ).start()
 
     # Put items into input queue
     threading.Thread(target=put_queue, args=(output_queue, path)).start()
