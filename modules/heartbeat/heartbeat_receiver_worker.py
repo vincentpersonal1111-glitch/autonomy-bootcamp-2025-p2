@@ -54,7 +54,9 @@ def heartbeat_receiver_worker(
         local_logger.error("Couldn't create heartbeat reciever")
         return
     while not controller.is_exit_requested():
-        recieve.run(timeout + 1e-2, queue)
+        controller.check_pause()
+        status = recieve.run(timeout + 1e-2)
+        queue.queue.put(status)
 
 
 # =================================================================================================

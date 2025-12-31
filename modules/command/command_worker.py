@@ -54,12 +54,19 @@ def command_worker(
     #                          ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
     # =============================================================================================
     # Instantiate class object (command.Command)
-    _, command_obj = command.Command.create(connection, local_logger)
+    success, command_obj = command.Command.create(connection, local_logger)
+    if not success:
+        local_logger.error("Could not create command object")
+    assert command_obj is not None
+    queue_info = None
     while not controller.is_exit_requested():
+        controller.check_pause()
         data = queue_input.queue.get()
         if data is None:
-            break
-        command_obj.run(data, target, queue_output)
+            continue
+        queue_info = command_obj.run(data, target)
+        if queue_info is not None:
+            queue_output.queue.put(queue_info)
 
     # Main loop: do work.
 

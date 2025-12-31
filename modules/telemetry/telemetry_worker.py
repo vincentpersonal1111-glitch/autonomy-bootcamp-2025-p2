@@ -18,8 +18,8 @@ from ..common.modules.logger import logger
 # =================================================================================================
 def telemetry_worker(
     connection: mavutil.mavfile,
-    controller: worker_controller.WorkerController,
     queue: queue_proxy_wrapper.QueueProxyWrapper,  # Place your own arguments here
+    controller: worker_controller.WorkerController,
     # Add other necessary worker arguments here
 ) -> None:
     """
@@ -55,6 +55,7 @@ def telemetry_worker(
         local_logger.error("Could not create telemetry object")
     assert telemetry_obj is not None
     while not controller.is_exit_requested():
+        controller.check_pause()
         data = telemetry_obj.run()
         if data is not None and data != "Not Ready":
             queue.queue.put(data)

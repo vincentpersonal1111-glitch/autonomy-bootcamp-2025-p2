@@ -1,0 +1,12 @@
+17:32:10: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_sender_drone.py | main | 40] Logger initialized
+17:32:11: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_sender_drone.py | main | 71] Drone: Recieved heartbeat! 1.000767707824707
+17:32:12: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_sender_drone.py | main | 71] Drone: Recieved heartbeat! 1.0008692741394043
+17:32:13: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_sender_drone.py | main | 71] Drone: Recieved heartbeat! 0.9994006156921387
+17:32:14: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_sender_drone.py | main | 71] Drone: Recieved heartbeat! 0.9996597766876221
+17:32:15: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_sender_drone.py | main | 71] Drone: Recieved heartbeat! 1.0042543411254883
+17:32:16: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_sender_drone.py | main | 71] Drone: Recieved heartbeat! 1.0003933906555176
+17:32:17: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_sender_drone.py | main | 71] Drone: Recieved heartbeat! 1.0037763118743896
+17:32:18: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_sender_drone.py | main | 71] Drone: Recieved heartbeat! 1.003598928451538
+17:32:19: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_sender_drone.py | main | 71] Drone: Recieved heartbeat! 1.0002295970916748
+17:32:20: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_sender_drone.py | main | 71] Drone: Recieved heartbeat! 1.0022540092468262
+17:32:21: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_sender_drone.py | main | 80] Passed!

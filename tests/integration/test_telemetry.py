@@ -139,7 +139,7 @@ def main() -> int:
         ),
     ).start()
 
-    telemetry_worker.telemetry_worker(connection, controller, queue)
+    telemetry_worker.telemetry_worker(connection, queue, controller)
     # =============================================================================================
     #                          ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
     # =============================================================================================

@@ -1,0 +1,26 @@
+17:33:55: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 47] Logger initialized
+17:33:55: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | __init__ | 104] Initialized
+17:33:55: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:33:56: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:33:56: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:33:57: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:33:57: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:33:58: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:33:58: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:33:59: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:33:59: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:34:00: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:34:01: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 64] timeout
+17:34:02: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 64] timeout
+17:34:03: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 64] timeout
+17:34:03: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:34:04: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:34:04: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:34:05: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:34:05: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:34:06: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:34:06: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:34:07: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:34:07: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:34:08: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 62] Recieved telemetry data
+17:34:09: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 64] timeout

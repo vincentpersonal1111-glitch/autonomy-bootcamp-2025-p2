@@ -64,6 +64,7 @@ def heartbeat_sender_worker(
         local_logger.error("Couldn't create heartbeat sender object")
     assert sender is not None
     while not controller.is_exit_requested():
+        controller.check_pause()
         now = sender.run()
         time.sleep(1)
         local_logger.info(f"Sent Heartbeat {time.time()-now}")

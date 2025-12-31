@@ -1,0 +1,23 @@
+17:32:36: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver_worker.py | heartbeat_receiver_worker | 46] Logger initialized
+17:32:36: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 62] Heartbeat detected
+17:32:36: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 62] Heartbeat detected
+17:32:37: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 62] Heartbeat detected
+17:32:38: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 62] Heartbeat detected
+17:32:39: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 62] Heartbeat detected
+17:32:40: [WARNING] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 58] Heartbeat not detected
+17:32:42: [WARNING] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 58] Heartbeat not detected
+17:32:43: [WARNING] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 58] Heartbeat not detected
+17:32:44: [WARNING] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 58] Heartbeat not detected
+17:32:45: [WARNING] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 58] Heartbeat not detected
+17:32:46: [WARNING] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 58] Heartbeat not detected
+17:32:47: [WARNING] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 58] Heartbeat not detected
+17:32:48: [WARNING] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 58] Heartbeat not detected
+17:32:48: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 62] Heartbeat detected
+17:32:49: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 62] Heartbeat detected
+17:32:50: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 62] Heartbeat detected
+17:32:51: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 62] Heartbeat detected
+17:32:52: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 62] Heartbeat detected
+17:32:53: [WARNING] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 58] Heartbeat not detected
+17:32:54: [INFO] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 62] Heartbeat detected
+17:32:55: [WARNING] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 58] Heartbeat not detected
+17:32:57: [WARNING] [C:\Users\light\WARG\autonomy-bootcamp-2025-p2\modules\heartbeat\heartbeat_receiver.py | run | 58] Heartbeat not detected
